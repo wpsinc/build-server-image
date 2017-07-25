@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # Primary container image where all steps run.
-      - image: alpine:3.6
+      - image: docker:17.06.0-ce
 
     steps:
       - checkout
@@ -13,30 +13,11 @@ jobs:
           version: 17.06.0-ce
 
       - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VERSION="17.06.0-ce"
-            curl -L -o /tmp/docker-$VERSION.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VERSION.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VERSION.tgz
-            mv /tmp/docker/* /usr/bin
-
-      - run:
-          name: Docker build
+          name: Docker build, login, and push
           command: |
             set -x
             TAG=v0.1.$CIRCLE_BUILD_NUM
             docker build --tag="wpsinc/build-server-image:$TAG" ./
             docker build --tag="wpsinc/build-server-image:latest" ./
-
-      - run:
-          name: Docker login and push
-          command: |
-            set -x
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push wpsinc/build-server-image:$TAG
-
-
-# TODO:
-# docker login
-# docker push
