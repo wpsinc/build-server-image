@@ -1,0 +1,11 @@
+/.git
+/.idea
+/.circleci/config.yml
+
+.dockerignore
+.gitattributes
+.gitignore
+Dockerfile
+LICENSE
+README.md
+Dockerfile
