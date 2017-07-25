@@ -9,6 +9,8 @@ jobs:
       - checkout
 
       - setup_remote_docker:
+          exclusive: false
+          reusable: true
           version: 17.06.0-ce
 
       - run:
