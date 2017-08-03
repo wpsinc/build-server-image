@@ -9,6 +9,7 @@ RUN apt-get install -y \
     ca-certificates \
     git \
     gzip \
+    sqlite3 \
     ssh \
     tar \
     zip
