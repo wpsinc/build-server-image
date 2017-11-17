@@ -1,4 +1,4 @@
-FROM php:7.1.7-cli
+FROM php:7.1.11-cli
 
 MAINTAINER "Austin Maddox" <amaddox@wps-inc.com>
 
