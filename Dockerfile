@@ -14,6 +14,14 @@ RUN apt-get install -y \
     tar \
     zip
 
+# Install AWS CLI.
+RUN apt-get install -y \
+    groff \
+    python \
+    && curl -O https://bootstrap.pypa.io/get-pip.py \
+    && python get-pip.py --user \
+    && python ~/.local/lib/python2.7/site-packages/pip install awscli --upgrade
+
 # Install PHP extensions.
 RUN docker-php-ext-install \
     bcmath \
