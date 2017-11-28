@@ -1,4 +1,4 @@
-FROM php:7.1.11-cli
+FROM php:7.1.12-cli
 
 MAINTAINER "Austin Maddox" <amaddox@wps-inc.com>
 
@@ -7,6 +7,7 @@ RUN apt-get update
 # Install required tools (https://circleci.com/docs/2.0/custom-images/#adding-required-and-custom-tools-or-files)
 RUN apt-get install -y \
     ca-certificates \
+    curl \
     git \
     gzip \
     sqlite3 \
@@ -14,12 +15,18 @@ RUN apt-get install -y \
     tar \
     zip
 
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y \
+    nodejs
+
 # Install AWS CLI.
 RUN apt-get install -y \
     groff \
     python \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
     && python get-pip.py --user \
+    && rm get-pip.py \
     && python ~/.local/lib/python2.7/site-packages/pip install awscli --upgrade
 
 # Install PHP extensions.
