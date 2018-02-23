@@ -2,5 +2,5 @@
 
 ##### Docker build
 ```shell
-docker build --rm --force-rm --tag="wpsinc/build-server-image:latest" ./
+docker build --rm --force-rm --tag="build-server-image:master-latest" ./
 ```
