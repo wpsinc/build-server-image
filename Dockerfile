@@ -29,6 +29,13 @@ RUN apt-get install -y \
     && rm get-pip.py \
     && python ~/.local/lib/python2.7/site-packages/pip install awscli --upgrade
 
+# Install GD library.
+RUN apt-get install -y \
+    libpng12-dev \
+    libjpeg-dev \
+    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+    && docker-php-ext-install gd
+
 # Install PHP extensions.
 RUN docker-php-ext-install \
     bcmath \
