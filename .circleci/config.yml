@@ -27,6 +27,12 @@ jobs:
             docker tag ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-latest
             docker tag ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-v${CIRCLE_BUILD_NUM}
 
+      - run:
+          name: Docker login.
+          command: |
+            set -x
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+
       - deploy:
           name: Docker push.
           command: |
