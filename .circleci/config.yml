@@ -9,9 +9,6 @@ jobs:
     docker:
       - image: docker:stable
 
-    environment:
-      ECR_URI: 402174392361.dkr.ecr.us-west-2.amazonaws.com
-
     steps:
       - checkout
 
@@ -27,26 +24,12 @@ jobs:
           name: Docker tag.
           command: |
             set -x
-            docker tag ${CIRCLE_PROJECT_REPONAME} ${ECR_URI}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-latest
-            docker tag ${CIRCLE_PROJECT_REPONAME} ${ECR_URI}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-v${CIRCLE_BUILD_NUM}
-
-      - deploy:
-          name: Install the AWS Command Line Interface (CLI).
-          command: |
-            apk --no-cache add \
-            py-pip
-
-            pip install awscli --upgrade
-
-      - deploy:
-          name: Get Docker login from ECR and then run the Docker login command.
-          command: |
-            DOCKER_LOGIN_CMD=`aws ecr get-login --region="us-west-2" --no-include-email`
-            ${DOCKER_LOGIN_CMD}
+            docker tag ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-latest
+            docker tag ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-v${CIRCLE_BUILD_NUM}
 
       - deploy:
           name: Docker push.
           command: |
             set -x
-            docker push ${ECR_URI}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-latest
-            docker push ${ECR_URI}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-v${CIRCLE_BUILD_NUM}
+            docker push ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-latest
+            docker push ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}-v${CIRCLE_BUILD_NUM}
