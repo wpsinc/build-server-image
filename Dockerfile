@@ -40,7 +40,8 @@ RUN apt-get install -y \
 RUN docker-php-ext-install \
     bcmath \
     mbstring \
-    pdo_mysql
+    pdo_mysql \
+    zip
 
 # Install Composer executable.
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
