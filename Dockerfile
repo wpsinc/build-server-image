@@ -1,6 +1,6 @@
 FROM php:7.1.12-cli
 
-MAINTAINER "Austin Maddox" <amaddox@wps-inc.com>
+MAINTAINER "WPS" <web_services@wps-inc.com>
 
 RUN apt-get update
 
