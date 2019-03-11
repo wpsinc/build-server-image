@@ -13,6 +13,7 @@ RUN apt-get install -y \
     sqlite3 \
     ssh \
     tar \
+    libpq-dev \
     zip
 
 # Install Node.js.
@@ -41,6 +42,8 @@ RUN docker-php-ext-install \
     bcmath \
     mbstring \
     pdo_mysql \
+    pgsql \
+    pdo_pgsql \
     zip
 
 # Install Composer executable.
