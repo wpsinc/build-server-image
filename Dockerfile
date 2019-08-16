@@ -1,8 +1,8 @@
-FROM php:7.1.12-cli
+FROM php:7.3-buster
 
 MAINTAINER "WPS" <web_services@wps-inc.com>
 
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+RUN printf "deb http://deb.debian.org/debian buster main\n deb-src http://deb.debian.org/debian buster main\n deb http://deb.debian.org/debian-security/ buster/updates main\ndeb-src http://deb.debian.org/debian-security/ buster/updates main\n deb http://deb.debian.org/debian buster-updates main\n deb-src http://deb.debian.org/debian buster-updates main" > /etc/apt/sources.list
 
 RUN apt-get update
 
@@ -16,25 +16,17 @@ RUN apt-get install -y \
     ssh \
     tar \
     libpq-dev \
-    zip
+    libzip-dev \
+    awscli
 
 # Install Node.js.
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && apt-get install -y \
     nodejs
 
-# Install AWS CLI.
-RUN apt-get install -y \
-    groff \
-    python \
-    && curl -O https://bootstrap.pypa.io/get-pip.py \
-    && python get-pip.py --user \
-    && rm get-pip.py \
-    && python ~/.local/lib/python2.7/site-packages/pip install awscli --upgrade
-
 # Install GD library.
 RUN apt-get install -y \
-    libpng12-dev \
+    libpng-dev \
     libjpeg-dev \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd
