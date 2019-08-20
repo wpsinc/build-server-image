@@ -17,11 +17,11 @@ RUN apt-get install -y \
     tar \
     libpq-dev \
     libzip-dev \
-    awscli
+    awscli \
+    curl
 
 # Install Node.js
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
-apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
 
 # Install GD library.
 RUN apt-get install -y \
