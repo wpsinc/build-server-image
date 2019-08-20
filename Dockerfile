@@ -17,11 +17,10 @@ RUN apt-get install -y \
     tar \
     libpq-dev \
     libzip-dev \
-    awscli \
-    curl
+    awscli
 
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
 
 RUN npm install node-sass
 
