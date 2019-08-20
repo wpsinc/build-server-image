@@ -23,6 +23,8 @@ RUN apt-get install -y \
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
 
+RUN npm install node-sass
+
 # Install GD library.
 RUN apt-get install -y \
     libpng-dev \
