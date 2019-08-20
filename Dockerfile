@@ -17,7 +17,7 @@ RUN apt-get install -y \
     tar \
     libpq-dev \
     libzip-dev \
-    awscli \
+    awscli
 
 # Install Node.js
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
