@@ -1,4 +1,4 @@
-FROM php:7.3-buster
+FROM php:7.3-cli
 
 MAINTAINER "WPS" <web_services@wps-inc.com>
 
@@ -9,7 +9,7 @@ RUN apt-get update
 # Install required tools (https://circleci.com/docs/2.0/custom-images/#adding-required-and-custom-tools-or-files)
 RUN apt-get install -y \
     ca-certificates \
-    curl \
+    libcurl4 \
     git \
     gzip \
     sqlite3 \
