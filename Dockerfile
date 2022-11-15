@@ -1,4 +1,4 @@
-FROM php:7.4-cli
+FROM php:7.3-cli
 
 MAINTAINER "WPS" <web_services@wps-inc.com>
 
@@ -20,7 +20,7 @@ RUN apt-get install -y \
     awscli
 
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
+RUN ccurl -fsSL https://rpm.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 
 RUN npm install node-sass
 
