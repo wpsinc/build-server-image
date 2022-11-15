@@ -24,7 +24,7 @@ RUN apt-get install -y \
 # Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
 
-RUN npm install node-sass
+RUN npm install node-sass@4.14.0
 
 # Install GD library.
 RUN apt-get install -y \
