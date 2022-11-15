@@ -2,7 +2,7 @@ FROM php:7.4-cli
 
 MAINTAINER "WPS" <web_services@wps-inc.com>
 
-RUN printf "deb http://deb.debian.org/debian buster main\n deb-src http://deb.debian.org/debian buster main\n deb http://deb.debian.org/debian-security/ buster/updates main\ndeb-src http://deb.debian.org/debian-security/ buster/updates main\n deb http://deb.debian.org/debian buster-updates main\n deb-src http://deb.debian.org/debian buster-updates main" > /etc/apt/sources.list
+# RUN printf "deb http://deb.debian.org/debian buster main\n deb-src http://deb.debian.org/debian buster main\n deb http://deb.debian.org/debian-security/ buster/updates main\ndeb-src http://deb.debian.org/debian-security/ buster/updates main\n deb http://deb.debian.org/debian buster-updates main\n deb-src http://deb.debian.org/debian buster-updates main" > /etc/apt/sources.list
 
 RUN apt-get update
 
@@ -17,10 +17,12 @@ RUN apt-get install -y \
     tar \
     libpq-dev \
     libzip-dev \
+    libonig-dev \
     awscli
+    
 
 # Install Node.js
-RUN ccurl -fsSL https://rpm.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
 
 RUN npm install node-sass
 
@@ -28,7 +30,7 @@ RUN npm install node-sass
 RUN apt-get install -y \
     libpng-dev \
     libjpeg-dev \
-    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+    && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install gd
 
 # Install PHP extensions.
